@@ -68,7 +68,7 @@ fn run_app() -> Result<(), Error> {
                 .long("reporter")
                 .takes_value(true),
         )
-        .arg(Arg::new("TARGET").required(true).last(true))
+        .arg(Arg::new("TARGET").short('f').long("file").takes_value(true).required(true))
         .help_template(
             "\
 -------------------------------------------------------------
@@ -77,7 +77,7 @@ fn run_app() -> Result<(), Error> {
            By: {author}
 
 
-  USAGE:\tabrute <RANGE> <CHARACTERS> [OPTIONS] -- <TARGET>
+  USAGE:\tabrute <RANGE> <CHARACTERS> [OPTIONS] -f <TARGET>
 
    <RANGE>         Single digit or a range 4:6 for password length.
    <CHARACTERS>    Characters to use in password attempt. Don't use quotes
@@ -95,8 +95,7 @@ fn run_app() -> Result<(), Error> {
                    split the workload without trying the same passwords.
    -r, --reporter  Use `spinner`, or `benchmark` to use a different command
                    line reporter.
-   <TARGET>        Target file to decrypt.  The target must be preceeded
-                   by a double dash: -- target.aes
+   -f              Target file to decrypt.
    -h, --help      Prints help information.
    -v, --version   Prints version information.
 
